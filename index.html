@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#050a18" />
+  <title>Donnar.Tech Photo Booth</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="kiosk">
+    <header class="topbar">
+      <img class="brand" src="public/donnar-tech-logo.png" alt="Donnar.Tech" />
+      <div class="status"><i></i> PHOTO BOOTH <span>•</span> พร้อมให้บริการ</div>
+    </header>
+
+    <section class="screen active" id="styleScreen">
+      <div class="builder">
+        <div class="eyebrow">01 · ออกแบบภาพของคุณ</div>
+        <h1>เลือกสไตล์<br/><span>ในแบบคุณ</span></h1>
+        <p class="builder-sub">เลือกรูปแบบแถบภาพและฟิลเตอร์ ก่อนเริ่มถ่าย</p>
+        <div class="choice-label">รูปแบบภาพ <small>เลือกได้ 1 แบบ</small></div>
+        <div class="layout-options">
+          <button class="layout-option selected" data-layout="2x3" aria-pressed="true">
+            <span class="strip strip-2"><i></i><i></i><i></i></span>
+            <span><b>2 × 3</b><small>ถ่าย 6 รูป · ฿120</small></span><em>✓</em>
+          </button>
+          <button class="layout-option" data-layout="1x3" aria-pressed="false">
+            <span class="strip strip-1"><i></i><i></i><i></i></span>
+            <span><b>1 × 3</b><small>ถ่าย 3 รูป · ฿100</small></span><em>✓</em>
+          </button>
+        </div>
+        <div class="choice-label filter-title">ฟิลเตอร์ <small>เปลี่ยนได้ก่อนถ่าย</small></div>
+        <div class="filters" role="group" aria-label="เลือกฟิลเตอร์">
+          <button class="filter selected" data-filter="original"><span class="filter-thumb original">Aa</span><small>Original</small></button>
+          <button class="filter" data-filter="soft"><span class="filter-thumb soft">Aa</span><small>Soft</small></button>
+          <button class="filter" data-filter="warm"><span class="filter-thumb warm">Aa</span><small>Warm</small></button>
+          <button class="filter" data-filter="film"><span class="filter-thumb film">Aa</span><small>Film</small></button>
+          <button class="filter" data-filter="mono"><span class="filter-thumb mono">Aa</span><small>Mono</small></button>
+        </div>
+        <div class="choice-label frame-title">กรอบรูป <small>เลือกกรอบที่ชอบ</small></div>
+        <div class="frame-options" role="group" aria-label="เลือกกรอบรูป">
+          <button class="frame-option selected" data-frame="clean" aria-pressed="true"><span class="frame-sample clean-frame"><i></i><i></i><i></i></span><small>มินิมอล</small></button>
+          <button class="frame-option" data-frame="pink" aria-pressed="false"><span class="frame-sample pink-frame"><i></i><i></i><i></i></span><small>หวาน</small></button>
+          <button class="frame-option" data-frame="blue" aria-pressed="false"><span class="frame-sample blue-frame"><i></i><i></i><i></i></span><small>คลาวด์</small></button>
+          <button class="frame-option" data-frame="flower" aria-pressed="false"><span class="frame-sample flower-frame"><i></i><i></i><i></i></span><small>ฟลอรัล</small></button>
+        </div>
+        <div class="choice-label timer-title">เวลานับถอยหลังก่อนถ่ายแต่ละภาพ</div>
+        <div class="timer-options" id="timerSettings" role="group" aria-label="เลือกเวลานับถอยหลัง">
+          <button class="timer-option" data-seconds="10" aria-pressed="false">10 วิ</button>
+          <button class="timer-option" data-seconds="5" aria-pressed="false">5 วิ</button>
+          <button class="timer-option selected" data-seconds="3" aria-pressed="true">3 วิ</button>
+        </div>
+        <button id="continueBtn" class="primary continue">เลือกแล้ว ไปต่อ <span>→</span></button>
+      </div>
+      <div class="preview-panel">
+        <div class="preview-top"><span>ตัวอย่างรูปแบบภาพ</span><span class="live-dot">DONNAR.TECH</span></div>
+        <div class="print-preview">
+          <div class="mini-strip frame-clean" id="miniStrip"><i></i><i></i><i></i><b>DONNAR · PHOTO BOOTH</b></div>
+        </div>
+        <div class="preview-strip-wrap"><span id="layoutCaption">2 × 3 นิ้ว · 6 ภาพ</span></div>
+        <div class="preview-hint">ภาพตัวอย่างแสดงตำแหน่งและจำนวนช่อง</div>
+      </div>
+    </section>
+
+    <section class="screen" id="paymentScreen">
+      <div class="hero">
+        <div class="eyebrow">เก็บช่วงเวลาดี ๆ ไว้กับคุณ</div>
+        <h1>พร้อมถ่าย<br/><span>ภาพสวยของคุณ?</span></h1>
+        <p>เลือกท่าโพส แล้วรับภาพพิมพ์สุดพิเศษกลับบ้าน</p>
+        <div class="price"><small>ค่าบริการ</small><strong id="priceValue">฿120</strong><small id="priceUnit">ต่อ 1 ครั้ง · 6 รูป</small></div>
+      </div>
+      <div class="pay-card">
+        <div class="card-heading"><span class="step">02</span><div><b>สแกนเพื่อเริ่มต้น</b><small>เปิดแอปธนาคารแล้วสแกน QR</small></div></div>
+        <div class="qr-wrap"><div id="qr" aria-label="QR code ตัวอย่าง"><div class="qr-mark">D</div></div></div>
+        <div class="amount">ยอดชำระ <b id="amountValue">฿120.00</b></div>
+        <div class="secure"><span>◈</span> ระบบชำระเงินปลอดภัย</div>
+        <button id="demoPay" class="primary">จำลองชำระเงิน <span>→</span></button>
+        <div class="demo-note">โหมดตัวอย่าง · ปุ่มนี้ไม่เรียกเก็บเงินจริง</div>
+        <button id="editStyle" class="edit-style">← กลับไปแก้รูปแบบและฟิลเตอร์</button>
+      </div>
+      <div class="payment-footer"><span>รองรับ Mobile Banking</span><span>โปรดชำระตามยอดที่แสดง</span></div>
+    </section>
+
+    <section class="screen camera-screen" id="cameraScreen">
+      <div class="camera-main">
+        <div class="camera-stage" id="cameraStage">
+          <video id="cameraVideo" autoplay playsinline muted></video>
+          <canvas id="captureCanvas" hidden></canvas>
+          <div class="camera-placeholder" id="cameraPlaceholder"><div class="camera-icon">◎</div><b>กำลังเปิดกล้อง</b><span>โปรดรอสักครู่</span><button id="enableCamera" class="camera-enable" hidden>ลองเปิดกล้องอีกครั้ง</button></div>
+          <div class="camera-badge" id="cameraBadge">LIVE · DEMO</div>
+          <div class="shot-overlay" id="shotOverlay"><span id="shotCount"></span></div>
+        </div>
+        <div class="camera-meta"><span id="shotProgress">พร้อมถ่าย 3 ภาพ</span><span id="filterLabel">ฟิลเตอร์: Original</span></div>
+      </div>
+      <aside class="camera-controls">
+        <div class="eyebrow">03 · CAMERA STUDIO</div>
+        <h2>พร้อมแล้ว<br/><span>เริ่มถ่ายกัน</span></h2>
+        <p>เลือกฟิลเตอร์ได้ตลอด ก่อนเริ่มถ่าย</p>
+        <div class="camera-filters">
+          <button class="camera-filter selected" data-filter="original"><span class="filter-thumb original">Aa</span><small>ธรรมชาติ</small></button>
+          <button class="camera-filter" data-filter="soft"><span class="filter-thumb soft">Aa</span><small>ผิวออร่า</small></button>
+          <button class="camera-filter" data-filter="warm"><span class="filter-thumb warm">Aa</span><small>อมชมพู</small></button>
+          <button class="camera-filter" data-filter="film"><span class="filter-thumb film">Aa</span><small>Y2K Film</small></button>
+          <button class="camera-filter" data-filter="mono"><span class="filter-thumb mono">Aa</span><small>ขาวดำ</small></button>
+        </div>
+        <div class="camera-count">เวลานับถอยหลังก่อนแต่ละภาพ</div>
+        <div class="camera-timers" role="group" aria-label="ปรับเวลานับถอยหลังในหน้ากล้อง">
+          <button class="camera-timer" data-seconds="10">10 วิ</button>
+          <button class="camera-timer" data-seconds="5">5 วิ</button>
+          <button class="camera-timer selected" data-seconds="3">3 วิ</button>
+        </div>
+        <button class="primary start-capture" id="startCapture" disabled>เริ่มถ่าย <span>→</span></button>
+        <small class="capture-help">กดครั้งเดียว ระบบจะนับและถ่ายต่อเนื่องจนครบ</small>
+        <button class="edit-style" id="cancelCamera">ยกเลิกและกลับหน้าเริ่มต้น</button>
+      </aside>
+    </section>
+
+    <div class="payment-modal" id="paymentModal" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle" hidden>
+      <div class="payment-modal-card"><div class="modal-check">✓</div><div class="eyebrow">PAYMENT COMPLETE</div><h2 id="paymentModalTitle">ชำระเงินสำเร็จ</h2><p>กำลังเตรียมกล้องของคุณ</p></div>
+    </div>
+
+    <section class="screen result-screen" id="resultScreen">
+      <div class="result-copy"><div class="eyebrow">04 · YOUR PHOTO STRIP</div><h2>ภาพของคุณ<br/><span>พร้อมแล้ว!</span></h2><p>ตัวอย่างภาพถ่ายจากกล้อง · ระบบพิมพ์และ QR ดาวน์โหลดจะเชื่อมต่อในขั้นถัดไป</p><div class="result-actions"><button class="primary" id="printDemo">พิมพ์ตัวอย่าง <span>→</span></button><button class="secondary" id="newSession">เสร็จแล้ว เริ่มใหม่</button></div><div class="demo-note">DEMO · ยังไม่ส่งงานพิมพ์จริง</div></div>
+      <div class="result-strip" id="resultStrip"></div>
+    </section>
+
+    <footer>Powered by <b>Donnar.Tech</b><span>PHOTO BOOTH EXPERIENCE</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
